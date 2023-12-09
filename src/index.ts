@@ -1,10 +1,8 @@
 import { Markup, Telegraf } from 'telegraf';
 import { produtos } from './temp/temp.storage'
 import { sendCatalog } from './utils/sendCatalog';
-import { Produto } from './interface/produto.interface';
-import { config } from './config/config';
 import express from 'express'
-// import { PaymentListner } from './api/webhook';
+import isPortReachable from 'is-port-reachable';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 
@@ -46,8 +44,8 @@ bot.command('catalogo', async (ctx) => {
 
         servidor.close();
       })
-
-      const servidor = app.listen(config.application.PORT, () => console.log("Esperando pagamento"))
+      
+      const servidor = app.listen(Math.floor(Math.random() * (65535 - 0 + 1)) + 0, () => console.log("Esperando pagamento"))
     });
   }
 
