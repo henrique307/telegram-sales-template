@@ -34,10 +34,14 @@ bot.command('catalogo', async (ctx) => {
         parse_mode: "Markdown"
       })
 
+      let pagamentoResolvido = false
+
       app.post('/pagamentoAprovado', (req, res) => {
         res.send("Pagamento feito com sucesso!");
 
         ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
+
+        pagamentoResolvido = true
 
         servidor.close();
       })
@@ -46,6 +50,8 @@ bot.command('catalogo', async (ctx) => {
         res.send("pagamento recusado!");
 
         ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
+
+        pagamentoResolvido = true
         
         servidor.close();
       })
@@ -55,8 +61,10 @@ bot.command('catalogo', async (ctx) => {
       })
 
       setTimeout(() => {
-        ctx.reply(`Tempo limite atingido, por favor tente novamente.`)
-        servidor.close();
+        if(!pagamentoResolvido) {
+          ctx.reply(`Tempo limite atingido, por favor tente novamente.`)
+          servidor.close();
+        }
       }, 180000);
 
     });
