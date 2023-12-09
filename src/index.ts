@@ -2,7 +2,6 @@ import { Markup, Telegraf } from 'telegraf';
 import { produtos } from './temp/temp.storage'
 import { sendCatalog } from './utils/sendCatalog';
 import express from 'express'
-import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
@@ -56,7 +55,7 @@ bot.command('catalogo', async (ctx) => {
         servidor.close();
       })
       
-      const servidor = app.listen(config.application.PORT, () => {
+      const servidor = app.listen(process.env.PORT || 3000, () => {
         ctx.reply(`Aguardando pagamento para continuar...`)
       })
 
