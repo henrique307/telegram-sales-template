@@ -35,36 +35,36 @@ bot.command('catalogo', async (ctx) => {
 
       let pagamentoResolvido = false
 
-      app.post('/pagamentoAprovado', (req, res) => {
-        res.send("Pagamento feito com sucesso!");
+      // app.post('/pagamentoAprovado', (req, res) => {
+      //   res.send("Pagamento feito com sucesso!");
 
-        ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
+      //   ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
 
-        pagamentoResolvido = true
+      //   pagamentoResolvido = true
 
-        servidor.close();
-      })
+      //   servidor.close();
+      // })
 
-      app.post('/pagamentoRecusado', (req, res) => {
-        res.send("pagamento recusado!");
+      // app.post('/pagamentoRecusado', (req, res) => {
+      //   res.send("pagamento recusado!");
 
-        ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
+      //   ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
 
-        pagamentoResolvido = true
+      //   pagamentoResolvido = true
         
-        servidor.close();
-      })
+      //   servidor.close();
+      // })
       
-      const servidor = app.listen(process.env.PORT || 3000, () => {
-        ctx.reply(`Aguardando pagamento para continuar...`)
-      })
+      // const servidor = app.listen(process.env.PORT || 3000, () => {
+      //   ctx.reply(`Aguardando pagamento para continuar...`)
+      // })
 
-      setTimeout(() => {
-        if(!pagamentoResolvido) {
-          ctx.reply(`Tempo limite atingido, por favor tente novamente.`)
-          servidor.close();
-        }
-      }, 180000);
+      // setTimeout(() => {
+      //   if(!pagamentoResolvido) {
+      //     ctx.reply(`Tempo limite atingido, por favor tente novamente.`)
+      //     servidor.close();
+      //   }
+      // }, 180000);
 
     });
   }
