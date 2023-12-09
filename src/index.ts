@@ -35,7 +35,7 @@ bot.command('catalogo', async (ctx) => {
       })
 
       app.post('/pagamentoAprovado', (req, res) => {
-        console.log("Pagamento feito com sucesso!");
+        res.send("Pagamento feito com sucesso!");
 
         ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
 
@@ -43,7 +43,7 @@ bot.command('catalogo', async (ctx) => {
       })
 
       app.post('/pagamentoRecusado', (req, res) => {
-        console.log("pagamento recusado!");
+        res.send("pagamento recusado!");
 
         ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
         
