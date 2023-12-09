@@ -2,9 +2,16 @@ import { Markup, Telegraf } from 'telegraf';
 import { produtos } from './temp/temp.storage'
 import { sendCatalog } from './utils/sendCatalog';
 import express from 'express'
-import isPortReachable from 'is-port-reachable';
+import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
+const app = express();
+
+const rotaWebHook = `/webhook-${Math.floor(Math.random() * 10000)}`
+
+bot.telegram.setWebhook(`https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`)
+
+app.use(bot.webhookCallback(rotaWebHook))
 
 bot.start((ctx) => {
   ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de packs disponíveis.');
@@ -27,8 +34,6 @@ bot.command('catalogo', async (ctx) => {
         parse_mode: "Markdown"
       })
 
-      const app = express();
-
       app.post('/pagamentoAprovado', (req, res) => {
         console.log("Pagamento feito com sucesso!");
 
@@ -41,11 +46,19 @@ bot.command('catalogo', async (ctx) => {
         console.log("pagamento recusado!");
 
         ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
-
+        
         servidor.close();
       })
       
-      const servidor = app.listen(Math.floor(Math.random() * (65535 - 0 + 1)) + 0, () => console.log("Esperando pagamento"))
+      const servidor = app.listen(config.application.PORT, () => {
+        ctx.reply(`Aguardando pagamento para continuar...`)
+      })
+
+      setTimeout(() => {
+        ctx.reply(`Tempo limite atingido, por favor tente novamente.`)
+        servidor.close();
+      }, 180000);
+
     });
   }
 
