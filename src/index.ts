@@ -28,13 +28,15 @@ bot.command('catalogo', async (ctx) => {
   
   for (let produto of produtos) {
     bot.action(`resposta_${produto.nome}`, async (ctx) => {
+
       ctx.answerCbQuery();
 
       await ctx.reply(`Você selecionou o ${produto.nome}, Acesse este link para realisar o pagamento: ${produto.linkPagamento}`, {
         parse_mode: "Markdown"
-      })
+      });
             
-      appConfig(app, ctx, produto)
+      appConfig(app, ctx, produto);
+      
     });
   }
 

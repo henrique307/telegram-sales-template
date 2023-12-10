@@ -11,6 +11,8 @@ export function appConfig(app: Application, ctx: Context, produto: Produto) {
 
     app.post('/pagamentoAprovado', (req, res) => {
 
+        console.log(req.body)
+
         res.send("Pagamento feito com sucesso!");
 
         ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
@@ -21,7 +23,7 @@ export function appConfig(app: Application, ctx: Context, produto: Produto) {
 
         res.send("pagamento recusado!");
 
-        ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
+        ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`);
 
     })
 
