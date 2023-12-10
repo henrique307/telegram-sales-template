@@ -6,8 +6,8 @@ import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
-// const rotaWebHook = `/webhook`
-// app.use(bot.webhookCallback(rotaWebHook))
+
+app.use(await bot.createWebhook({domain: `https://many-packs-e61cfca5ea3b.herokuapp.com`}))
 
 bot.start((ctx) => {
   ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de packs disponíveis.');
@@ -50,6 +50,10 @@ bot.command('catalogo', async (ctx) => {
         
       })
 
+      app.listen(config.application.PORT, () => {
+        ctx.reply("Aguardando pagamento...")
+      })
+
       setTimeout(() => {
         if(!pagamentoResolvido) {
           ctx.reply(`Tempo limite para compra do pacote ${produto.nome} atingido, por favor tente novamente.`)
@@ -61,11 +65,11 @@ bot.command('catalogo', async (ctx) => {
 
 });
 
-bot.launch({
-  webhook: {
-    domain: `https://many-packs-e61cfca5ea3b.herokuapp.com`,
-    port: +config.application.PORT
-  }
-}).then(() => {
-  console.info("app rodando =)")
-})
+// bot.launch({
+//   webhook: {
+//     domain: `https://many-packs-e61cfca5ea3b.herokuapp.com`,
+//     port: +config.application.PORT
+//   }
+// }).then(() => {
+//   console.info("app rodando =)")
+// })
