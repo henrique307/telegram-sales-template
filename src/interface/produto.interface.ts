@@ -5,5 +5,4 @@ export interface Produto {
     imagem: string;
     linkPagamento: string;
     linkGrupo: string;
-    porta: number;
 }

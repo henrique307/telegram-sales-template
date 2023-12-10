@@ -9,7 +9,6 @@ export const produtos: Produto[] = [
     imagem: `${__dirname}/../assets/vip1.jpg`,
     linkPagamento: "https://pepper.com.br/checkout/index.html?p=100009&o=116454",
     linkGrupo: "https://aqui_fica_o_link_pro_seuGP1.com",
-    porta: 3000
   },
   {
     nome: 'VIP 2',
@@ -18,15 +17,13 @@ export const produtos: Produto[] = [
     imagem: `${__dirname}/../assets/vip2.jpg`,
     linkPagamento: "https://pepper.com.br/checkout/index.html?p=100248&o=116761",
     linkGrupo: "https://aqui_fica_o_link_pro_seuGP2.com",
-    porta: 4000
   },
   {
     nome: 'VIP 3',
     descricao: 'Grupo 3 - 154 vídeos e 495 fotos ',
     preco: 'R$79.90',
     imagem: `${__dirname}/../assets/vip3.jpg`,
-    linkPagamento: "https://pepper.com.br/checkout/index.html?p=100251&o=116767",
+    linkPagamento: "https://pepper.com.br/checkout/index.html?p=100350&o=116890",
     linkGrupo: "https://aqui_fica_o_link_pro_seuGP3.com",
-    porta: 8080
   },
 ];
