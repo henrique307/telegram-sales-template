@@ -6,8 +6,8 @@ import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
-const rotaWebHook = `/webhook`
-app.use(bot.webhookCallback(rotaWebHook))
+// const rotaWebHook = `/webhook`
+// app.use(bot.webhookCallback(rotaWebHook))
 
 bot.start((ctx) => {
   ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de packs disponíveis.');
