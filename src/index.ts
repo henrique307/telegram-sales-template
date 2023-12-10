@@ -52,13 +52,13 @@ bot.command('catalogo', async (ctx) => {
         servidor.close();
       })
       
-      const servidor = app.listen(config.application.PORT, () => {
+      const servidor = app.listen(+config.application.PORT + produtos.indexOf(produto), () => {
         ctx.reply(`Aguardando pagamento para continuar...`)
       })
 
       setTimeout(() => {
         if(!pagamentoResolvido) {
-          ctx.reply(`Tempo limite atingido, por favor tente novamente.`)
+          ctx.reply(`Tempo limite para compra do ${produto.nome} atingido, por favor tente novamente.`)
           servidor.close();
         }
       }, 180000);
