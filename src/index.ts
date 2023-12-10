@@ -7,17 +7,11 @@ import { config } from './config/config';
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
 
-const rotaWebhook = `/webhook-${Math.floor(Math.random() * 10000)}`;
-const webhookURL = `https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebhook}`
-
-bot.telegram.setWebhook(webhookURL)
-
 bot.start((ctx) => {
   ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de packs disponíveis.');
 });
 
 bot.command('catalogo', async (ctx) => {
-  app.use(bot.webhookCallback(rotaWebhook))
 
   await sendCatalog(ctx);
   
@@ -38,7 +32,6 @@ bot.command('catalogo', async (ctx) => {
       let pagamentoResolvido = false
       
       app.post('/pagamentoAprovado', (req, res) => {
-        bot.handleUpdate(req.body, res)
         
         res.send("Pagamento feito com sucesso!");
 
@@ -49,7 +42,6 @@ bot.command('catalogo', async (ctx) => {
       })
 
       app.post('/pagamentoRecusado', (req, res) => {
-        bot.handleUpdate(req.body, res)
         
         res.send("pagamento recusado!");
         
