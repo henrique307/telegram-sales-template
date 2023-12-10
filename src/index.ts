@@ -6,11 +6,7 @@ import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
-
 const rotaWebHook = `/webhook-${Math.floor(Math.random() * 10000)}`
-
-bot.telegram.setWebhook(`https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`)
-
 app.use(bot.webhookCallback(rotaWebHook))
 
 bot.start((ctx) => {
@@ -72,4 +68,11 @@ bot.command('catalogo', async (ctx) => {
 
 });
 
-bot.launch();
+bot.launch({
+  webhook: {
+    domain: `https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`,
+    port: +config.application.PORT
+  }
+}).then(() => {
+  console.info("app rodando =)")
+})
