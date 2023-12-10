@@ -1,7 +1,8 @@
-import express, { Application } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
 import cors from 'cors';
 import { Context } from "telegraf";
 import { Produto } from "../interface/produto.interface";
+import { produtos } from "../temp/temp.storage";
 
 export function appConfig(app: Application, ctx: Context, produto: Produto) {
     app.use(
@@ -9,13 +10,17 @@ export function appConfig(app: Application, ctx: Context, produto: Produto) {
         express.json()
     )
 
-    app.post('/pagamentoAprovado', (req, res) => {
+    app.post('/pagamentoAprovado', checaProduto, (req, res) => {
 
-        console.log(req.body)
+        if(!res.locals.produto) {
+            ctx.reply("Houve um erro ao ientificar o produto no banco de dados.")
+            res.status(404).send("ERRO")
+            return
+        }
 
         res.send("Pagamento feito com sucesso!");
 
-        ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
+        ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${res.locals.produto.linkGrupo}`)
 
     })
 
@@ -27,4 +32,12 @@ export function appConfig(app: Application, ctx: Context, produto: Produto) {
 
     })
 
+}
+
+function checaProduto(req: Request, res: Response, next: NextFunction) {
+    const produto = produtos.find(produto => produto.nome === req.body.prod_name)
+
+    res.locals.produto = produto
+
+    next();
 }
