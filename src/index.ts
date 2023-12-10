@@ -5,13 +5,13 @@ import express from 'express'
 import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
-const app = express();
+// const app = express();
 
-const rotaWebHook = `/webhook-${Math.floor(Math.random() * 10000)}`
+// const rotaWebHook = `/webhook-${Math.floor(Math.random() * 10000)}`
 
-bot.telegram.setWebhook(`https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`)
+// bot.telegram.setWebhook(`https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`)
 
-app.use(bot.webhookCallback(rotaWebHook))
+// app.use(bot.webhookCallback(rotaWebHook))
 
 bot.start((ctx) => {
   ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de packs disponíveis.');
@@ -72,10 +72,9 @@ bot.command('catalogo', async (ctx) => {
 
 });
 
-bot.launch({
-  webhook: {
-    domain: "https://many-packs-e61cfca5ea3b.herokuapp.com",
-    hookPath: rotaWebHook,
-    port: +config.application.PORT
-  }
-});
+bot.launch();
+
+// bot.createWebhook({
+//   domain: `https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`,
+//   path: rotaWebHook,
+// })
