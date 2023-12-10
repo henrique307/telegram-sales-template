@@ -52,7 +52,7 @@ bot.command('catalogo', async (ctx) => {
         servidor.close();
       })
       
-      const servidor = app.listen(config.application.PORT, () => {
+      const servidor = app.listen(produto.porta, () => {
         ctx.reply(`Aguardando pagamento para continuar...`)
       })
 
