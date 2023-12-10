@@ -3,6 +3,7 @@ import { produtos } from './temp/temp.storage'
 import { sendCatalog } from './utils/sendCatalog';
 import express from 'express'
 import { config } from './config/config';
+import { appConfig } from './utils/app.config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
@@ -32,35 +33,8 @@ bot.command('catalogo', async (ctx) => {
       await ctx.reply(`Você selecionou o ${produto.nome}, Acesse este link para realisar o pagamento: ${produto.linkPagamento}`, {
         parse_mode: "Markdown"
       })
-      
-      let pagamentoResolvido = false
-      
-      app.post('/pagamentoAprovado', (req, res) => {
-        
-        res.send("Pagamento feito com sucesso!");
-
-        ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
-
-        pagamentoResolvido = true
-
-      })
-
-      app.post('/pagamentoRecusado', (req, res) => {
-
-        res.send("pagamento recusado!");
-        
-        ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
-        
-        pagamentoResolvido = true
-        
-      })
-
-      setTimeout(() => {
-        if(!pagamentoResolvido) {
-          ctx.reply(`Tempo limite para compra do pacote ${produto.nome} atingido, por favor tente novamente.`)
-        }
-      }, 180000);
-
+            
+      appConfig(app, ctx, produto)
     });
   }
 
