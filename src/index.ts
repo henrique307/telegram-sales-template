@@ -7,21 +7,21 @@ import { config } from './config/config';
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
 
-app.use(await bot.createWebhook({domain: `https://many-packs-e61cfca5ea3b.herokuapp.com`}))
 
 bot.start((ctx) => {
   ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de packs disponíveis.');
 });
 
 bot.command('catalogo', async (ctx) => {
+  app.use(await bot.createWebhook({domain: `https://many-packs-e61cfca5ea3b.herokuapp.com`}))
   await sendCatalog(ctx);
-
+  
   await ctx.reply(`Qual produto você deseja?`, Markup.inlineKeyboard(
     produtos.map(produto => {
       return Markup.button.callback(produto.nome, `resposta_${produto.nome}`)
     })
   ))
-
+  
   for (let produto of produtos) {
     bot.action(`resposta_${produto.nome}`, async (ctx) => {
       ctx.answerCbQuery();
@@ -65,11 +65,11 @@ bot.command('catalogo', async (ctx) => {
 
 });
 
-// bot.launch({
-//   webhook: {
-//     domain: `https://many-packs-e61cfca5ea3b.herokuapp.com`,
-//     port: +config.application.PORT
-//   }
-// }).then(() => {
-//   console.info("app rodando =)")
-// })
+bot.launch({
+  webhook: {
+    domain: `https://many-packs-e61cfca5ea3b.herokuapp.com`,
+    port: +config.application.PORT
+  }
+}).then(() => {
+  console.info("app rodando =)")
+})
