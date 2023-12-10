@@ -1,3 +1,4 @@
+import { config } from "../config/config";
 import { Produto } from "../interface/produto.interface";
 
 
@@ -9,7 +10,7 @@ export const produtos: Produto[] = [
     imagem: `${__dirname}/../assets/vip1.jpg`,
     linkPagamento: "https://pepper.com.br/checkout/index.html?p=100009&o=116454",
     linkGrupo: "https://aqui_fica_o_link_pro_seuGP1.com",
-    porta: 3000
+    porta: +config.application.PORT - 100
   },
   {
     nome: 'VIP 2',
@@ -18,7 +19,7 @@ export const produtos: Produto[] = [
     imagem: `${__dirname}/../assets/vip2.jpg`,
     linkPagamento: "https://bit.ly/vipaninha2",
     linkGrupo: "https://aqui_fica_o_link_pro_seuGP2.com",
-    porta: 4000
+    porta: +config.application.PORT - 200
   },
   {
     nome: 'VIP 3',
@@ -27,6 +28,6 @@ export const produtos: Produto[] = [
     imagem: `${__dirname}/../assets/vip3.jpg`,
     linkPagamento: "https://bit.ly/vipaninha3",
     linkGrupo: "https://aqui_fica_o_link_pro_seuGP3.com",
-    porta: 8080
+    porta: +config.application.PORT + 100
   },
 ];
