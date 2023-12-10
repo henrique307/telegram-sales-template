@@ -70,8 +70,7 @@ bot.command('catalogo', async (ctx) => {
 
 bot.launch({
   webhook: {
-    domain: `https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`,
-    port: +config.application.PORT
+    domain: `https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`
   }
 }).then(() => {
   console.info("app rodando =)")
