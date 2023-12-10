@@ -56,7 +56,7 @@ bot.command('catalogo', async (ctx) => {
         servidor.close();
       })
       
-      const servidor = app.listen(process.env.PORT || 3000, () => {
+      const servidor = app.listen(config.application.PORT, () => {
         ctx.reply(`Aguardando pagamento para continuar...`)
       })
 
@@ -72,12 +72,4 @@ bot.command('catalogo', async (ctx) => {
 
 });
 
-bot.launch({
-  webhook: {
-      domain: process.env.DOMAIN || `https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebHook}`,
-      port: +config.application.PORT ,
-  }
-});
-
-// bot.createWebhook({
-// })
+bot.launch();
