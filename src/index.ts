@@ -39,7 +39,6 @@ bot.command('catalogo', async (ctx) => {
 
         pagamentoResolvido = true
 
-        servidor.close();
       })
 
       app.post('/pagamentoRecusado', (req, res) => {
@@ -49,17 +48,11 @@ bot.command('catalogo', async (ctx) => {
 
         pagamentoResolvido = true
         
-        servidor.close();
-      })
-      
-      const servidor = app.listen(produto.porta, () => {
-        ctx.reply(`Aguardando pagamento para continuar...`)
       })
 
       setTimeout(() => {
         if(!pagamentoResolvido) {
           ctx.reply(`Tempo limite para compra do pacote ${produto.nome} atingido, por favor tente novamente.`)
-          servidor.close();
         }
       }, 180000);
 
