@@ -34,10 +34,12 @@ bot.command('catalogo', async (ctx) => {
       await ctx.reply(`Você selecionou o ${produto.nome}, Acesse este link para realisar o pagamento: ${produto.linkPagamento}`, {
         parse_mode: "Markdown"
       })
-
+      
       let pagamentoResolvido = false
-
+      
       app.post('/pagamentoAprovado', (req, res) => {
+        bot.handleUpdate(req.body, res)
+        
         res.send("Pagamento feito com sucesso!");
 
         ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${produto.linkGrupo}`)
@@ -47,16 +49,14 @@ bot.command('catalogo', async (ctx) => {
       })
 
       app.post('/pagamentoRecusado', (req, res) => {
+        bot.handleUpdate(req.body, res)
+        
         res.send("pagamento recusado!");
-
+        
         ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`)
-
+        
         pagamentoResolvido = true
         
-      })
-
-      app.listen(config.application.PORT, () => {
-        ctx.reply("Aguardando pagamento...")
       })
 
       setTimeout(() => {
@@ -73,3 +73,5 @@ bot.command('catalogo', async (ctx) => {
 bot.launch().then(() => {
   console.info("app rodando =)")
 })
+
+app.listen(config.application.PORT, () => {console.log("WebHookOuvindo")})
