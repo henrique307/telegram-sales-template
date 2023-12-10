@@ -6,7 +6,7 @@ import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
-const rotaWebHook = `/webhook-${Math.floor(Math.random() * 10000)}`
+const rotaWebHook = `/webhook`
 app.use(bot.webhookCallback(rotaWebHook))
 
 bot.start((ctx) => {
@@ -58,7 +58,7 @@ bot.command('catalogo', async (ctx) => {
 
       setTimeout(() => {
         if(!pagamentoResolvido) {
-          ctx.reply(`Tempo limite para compra do ${produto.nome} atingido, por favor tente novamente.`)
+          ctx.reply(`Tempo limite para compra do pacote ${produto.nome} atingido, por favor tente novamente.`)
           servidor.close();
         }
       }, 180000);
