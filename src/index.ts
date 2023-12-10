@@ -2,6 +2,7 @@ import { Markup, Telegraf } from 'telegraf';
 import { produtos } from './temp/temp.storage'
 import { sendCatalog } from './utils/sendCatalog';
 import express from 'express'
+import { config } from './config/config';
 
 const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
@@ -71,4 +72,10 @@ bot.command('catalogo', async (ctx) => {
 
 });
 
-bot.launch().then(() => console.log('Bot está online.'));
+bot.launch({
+  webhook: {
+    domain: "https://many-packs-e61cfca5ea3b.herokuapp.com",
+    hookPath: rotaWebHook,
+    port: +config.application.PORT
+  }
+});
