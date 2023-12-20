@@ -9,10 +9,9 @@ const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
 const app = express();
 
 const rotaWebhook = `/webhook-${Math.floor(Math.random() * 10000)}`;
-const webhookURL = `https://many-packs-e61cfca5ea3b.herokuapp.com${rotaWebhook}`
 
 bot.start((ctx) => {
-  ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de packs disponíveis.');
+  ctx.reply('Olá! Seja Bem-vindo! Digite /catalogo para ver a nossa lista de produtos disponíveis.');
 });
 
 bot.command('catalogo', async (ctx) => {
