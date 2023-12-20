@@ -5,7 +5,7 @@ import express from 'express'
 import { config } from './config/config';
 import { appConfig } from './utils/app.config';
 
-const bot = new Telegraf('6541010593:AAEP1NHhycyDEMzGTuEm3HwjUAZjm2qfWqQ');
+const bot = new Telegraf(config.application.BOT_TOKEN);
 const app = express();
 
 const rotaWebhook = `/webhook-${Math.floor(Math.random() * 10000)}`;

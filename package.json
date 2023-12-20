@@ -6,7 +6,7 @@
   "scripts": {
     "teste": "node ./dist/config/config.js abacate",
     "start:dev": "start ngrok http --domain=kit-notable-fish.ngrok-free.app 3000 && node dist dev",
-    "start:prod": "node dist prod",
+    "start": "node dist prod",
     "build:dev": "tsc --watch",
     "copy-files": "mkdir dist\\assets && copyfiles -u 1 src/**/*.jpg dist",
     "build": "tsc && npm run copy-files",
