@@ -20,7 +20,7 @@ export function appConfig(app: Application, ctx: Context, produto: Produto) {
 
         res.send("Pagamento feito com sucesso!");
 
-        ctx.reply(`Pagamento realizado com sucesso! Aqui está o link do grupo: ${res.locals.produto.linkGrupo}`)
+        ctx.reply(`Pagamento realizado com sucesso! Aqui está o produto: ${res.locals.produto.linkGrupo}`)
 
     })
 

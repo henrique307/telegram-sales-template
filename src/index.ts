@@ -18,13 +18,13 @@ bot.command('catalogo', async (ctx) => {
   app.use(bot.webhookCallback(rotaWebhook))
 
   await sendCatalog(ctx);
-  
+
   await ctx.reply(`Qual produto você deseja?`, Markup.inlineKeyboard(
     produtos.map(produto => {
       return Markup.button.callback(produto.nome, `resposta_${produto.nome}`)
     })
   ))
-  
+
   for (let produto of produtos) {
     bot.action(`resposta_${produto.nome}`, async (ctx) => {
 
@@ -33,9 +33,9 @@ bot.command('catalogo', async (ctx) => {
       await ctx.reply(`Você selecionou o ${produto.nome}, Acesse este link para realisar o pagamento: ${produto.linkPagamento}`, {
         parse_mode: "Markdown"
       });
-            
+
       appConfig(app, ctx, produto);
-      
+
     });
   }
 
@@ -45,4 +45,4 @@ bot.launch().then(() => {
   console.info("app rodando =)")
 })
 
-app.listen(config.application.PORT, () => {console.log("WebHookOuvindo")})
+app.listen(config.application.PORT, () => { console.log("WebHookOuvindo") })
