@@ -7,7 +7,7 @@ export const produtos: Produto[] = [
     preco: 'R$14.90',
     imagem: `${__dirname}/../assets/vip1.jpg`,
     linkPagamento: "https://pepper.com.br/checkout/index.html?p=100009&o=116454",
-    linkGrupo: "https://aqui_fica_o_link_pro_seuGP1.com",
+    linkGrupo: "https://aqui_fica_o_link_pro_seu_Produto1.com",
   },
   {
     nome: 'Produto 2',
@@ -15,7 +15,7 @@ export const produtos: Produto[] = [
     preco: 'R$29.90',
     imagem: `${__dirname}/../assets/vip2.jpg`,
     linkPagamento: "https://pepper.com.br/checkout/index.html?p=100248&o=116761",
-    linkGrupo: "https://aqui_fica_o_link_pro_seuGP2.com",
+    linkGrupo: "https://aqui_fica_o_link_pro_seu_Produto2.com",
   },
   {
     nome: 'Produto 3',
@@ -23,6 +23,6 @@ export const produtos: Produto[] = [
     preco: 'R$79.90',
     imagem: `${__dirname}/../assets/vip3.jpg`,
     linkPagamento: "https://pepper.com.br/checkout/index.html?p=100350&o=116890",
-    linkGrupo: "https://aqui_fica_o_link_pro_seuGP3.com",
+    linkGrupo: "https://aqui_fica_o_link_pro_seu_Produto3.com",
   },
 ];
