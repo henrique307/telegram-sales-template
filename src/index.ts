@@ -34,7 +34,7 @@ bot.command('catalogo', async (ctx) => {
         parse_mode: "Markdown"
       });
 
-      appConfig(app, ctx, produto);
+      appConfig(app, ctx);
 
     });
   }

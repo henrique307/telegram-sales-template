@@ -1,10 +1,10 @@
 import express, { Application, NextFunction, Request, Response } from "express";
-import cors from 'cors';
 import { Context } from "telegraf";
 import { Produto } from "../interface/produto.interface";
 import { produtos } from "../temp/temp.storage";
+import cors from 'cors';
 
-export function appConfig(app: Application, ctx: Context, produto: Produto) {
+export function appConfig(app: Application, ctx: Context) {
     app.use(
         cors(),
         express.json()
