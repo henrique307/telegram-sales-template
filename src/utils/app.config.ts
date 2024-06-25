@@ -1,43 +1,32 @@
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Application } from "express";
 import { Context } from "telegraf";
-import { Produto } from "../interface/produto.interface";
-import { produtos } from "../temp/temp.storage";
 import cors from 'cors';
+import { getPayment, getProduct } from "./libs";
+import { products } from "../temp/temp.storage";
 
 export function appConfig(app: Application, ctx: Context) {
     app.use(
         cors(),
-        express.json()
+        express.json(),
     )
 
-    app.post('/pagamentoAprovado', checaProduto, (req, res) => {
+    app.post('/', async (req, res) => {
+        if (req.body.action === "payment.created") {
+            const payment = await getPayment(req.body.data.id);            
+            const produto = getProduct(payment.additional_info.items[0].id);
 
-        if(!res.locals.produto) {
-            ctx.reply("Houve um erro ao ientificar o produto no banco de dados.")
-            res.status(404).send("ERRO")
-            return
+            if (!produto)
+                return ctx.reply("Houve um problema processando sua requisição, por favor entre em contato com nosso [suporte](https://wa.me/5521990868835)",{ parse_mode: "Markdown" });
+
+            if (payment.status === "rejected")
+                return ctx.reply(`Pagamento recusado.`);
+
+            if (payment.status === "cancelled")
+                return ctx.reply(`Pagamento cancelado.`);
+
+            if (payment.status === "approved")
+                return ctx.reply(`Pagamento realizado com sucesso! Aqui está o produto: ${produto.content}`);
         }
-
-        res.send("Pagamento feito com sucesso!");
-
-        ctx.reply(`Pagamento realizado com sucesso! Aqui está o produto: ${res.locals.produto.linkGrupo}`)
-
     })
 
-    app.post('/pagamentoRecusado', (req, res) => {
-
-        res.send("pagamento recusado!");
-
-        ctx.reply(`Seu pagamento foi recusado! Por favor tente novamente.`);
-
-    })
-
-}
-
-function checaProduto(req: Request, res: Response, next: NextFunction) {
-    const produto = produtos.find(produto => produto.nome === req.body.prod_name)
-
-    res.locals.produto = produto
-
-    next();
 }
