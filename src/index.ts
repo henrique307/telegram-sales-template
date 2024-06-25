@@ -40,11 +40,9 @@ bot.command('catalogo', async (ctx) => {
 
       const linkPagamento = await Payment(product).catch(e => console.log(e));
 
-      console.log(linkPagamento)
-
       await ctx.reply(`Você selecionou o ${product.name}, Realize o pagamento [aqui](${linkPagamento})`, {
         parse_mode: "Markdown"
-      }).catch(e => console.log(e));
+      }).catch(e => console.error(e));
 
       appConfig(app, ctx);
 
