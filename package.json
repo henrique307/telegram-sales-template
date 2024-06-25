@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "teste": "node ./dist/config/config.js abacate",
-    "start:dev": "start ngrok http --domain=kit-notable-fish.ngrok-free.app 3000 && node dist dev",
+    "dev": "nodemon -- -- dev",
     "start": "node dist prod",
-    "build:dev": "tsc --watch",
     "copy-files": "mkdir dist\\assets && copyfiles -u 1 src/**/*.jpg dist",
-    "build": "tsc && npm run copy-files",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && npm run copy-files"
   },
   "keywords": [],
   "author": "",
