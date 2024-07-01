@@ -2,13 +2,16 @@ import express, { Application } from "express";
 import { Context } from "telegraf";
 import cors from 'cors';
 import { getPayment, getProduct } from "./libs";
-import { products } from "../temp/temp.storage";
 
 export function appConfig(app: Application, ctx: Context) {
     app.use(
         cors(),
         express.json(),
     )
+
+    app.get("/hello", (req, res) => {
+        res.status(200).send({message: "Olá mundo!"})
+    })
 
     app.post('/', async (req, res) => {
         if (req.body.action === "payment.created") {
