@@ -35,14 +35,24 @@ bot.command('catalogo', async (ctx) => {
   for (const product of products) {
     bot.action(`resposta_${product.name}`, async (ctx) => {
 
-      ctx.answerCbQuery();
-      ctx.reply("Gerando link de pagamento...");
+      await ctx.answerCbQuery();
+      await ctx.reply("Gerando link de pagamento...");
 
       const linkPagamento = await Payment(product).catch(e => console.log(e));
 
       await ctx.reply(`Você selecionou o ${product.name}, Realize o pagamento [aqui](${linkPagamento})`, {
         parse_mode: "Markdown"
       }).catch(e => console.error(e));
+
+      await ctx.reply(`
+        /// Versão de testes ///\nUse o cartão de teste para simular o pagamento
+
+        número: \`5031 4332 1540 6351\`
+        código de segurança: \`123\`
+        exp: \`11/25\`
+        cpf: \`12345678909\`
+
+        `, {parse_mode: "Markdown"})
 
       appConfig(app, ctx);
 
