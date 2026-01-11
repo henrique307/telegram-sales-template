@@ -49,7 +49,7 @@ bot.command('catalogo', async (ctx) => {
 
         número: \`5031 4332 1540 6351\`
         código de segurança: \`123\`
-        exp: \`11/25\`
+        exp: \`11/30\`
         cpf: \`12345678909\`
 
         `, {parse_mode: "Markdown"})
