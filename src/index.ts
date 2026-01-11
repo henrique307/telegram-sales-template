@@ -48,6 +48,7 @@ bot.command('catalogo', async (ctx) => {
         /// Versão de testes ///\nUse o cartão de teste para simular o pagamento
 
         número: \`5031 4332 1540 6351\`
+        nome do titular: \`APRO\`
         código de segurança: \`123\`
         exp: \`11/30\`
         cpf: \`12345678909\`
